@@ -43,7 +43,7 @@ class monsterController extends controller
     {
         if (monsterHelper::checkSearchParams($request)) {
             $ret = array();
-            $search = monsters::select('id', 'name', 'cr');
+            $search = monsters::select('id', 'name', 'cr', 'size', 'type', 'hp', 'wildshape', 'ac', 'align');
             if ($request->getParam('name')) {
 
                 $search = $search->where('name', 'like', "%" . $request->getParam('name') . "%");
@@ -100,10 +100,15 @@ class monsterController extends controller
                 $search = $search->where('align', $request->getParam('align'));
             }
             foreach ($search->get() as $m) {
+                $data = array();
+                foreach (array('cr', 'size', 'type', 'hp', 'wildshape', 'ac', 'align') as $foo) {
+                    $data[$foo] = $m->{$foo};
+                }
+
                 $ret[] = array(
                     'id'        => $m->id,
                     'name'      => $m->name,
-                    'challenge' => $m->cr,
+                    'data'      => $data,
                     'link'      => (new apiHelper())->createLink('monsters', $m->name)
                 );
             }
