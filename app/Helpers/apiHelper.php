@@ -9,6 +9,7 @@ class apiHelper
 
     public function createLink($cat, $item)
     {
+        $item = str_replace(' ', '_', $item);
         return $this->base . "$cat/$item";
     }
 }
