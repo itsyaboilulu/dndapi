@@ -12,16 +12,14 @@ $app = new Slim\App([
         'db'    => [
             'driver'    => 'mysql',
             'host'      => '127.0.0.1',
-            'database'  => 'dnd',
-            'username'  => 'lulu',
-            'password'  => 1327,
+            'database'  => 'u519567483_dnd',
+            'username'  => 'u519567483_dnd',
+            'password'  => '9Ky*iF2tw',
             'charset'   => 'utf8',
             'collation' => 'utf8_unicode_ci',
         ],
     ],
 ]);
-
-
 
 require __DIR__ . '/../app/routes.php';
 
