@@ -12,11 +12,17 @@ class monsterController extends controller
     public function all($request, $response, $args)
     {
         $monsters = array();
-        foreach (monsters::select('id', 'name', 'cr')->get() as $m) {
+        foreach (monsters::select('id', 'name', 'cr', 'size', 'type', 'hp', 'wildshape', 'ac', 'align')->get() as $m) {
+
+            $data = array();
+            foreach (array('cr', 'size', 'type', 'hp', 'wildshape', 'ac', 'align') as $foo) {
+                $data[$foo] = $m->{$foo};
+            }
+
             $monsters[] = array(
                 'id'        => $m->id,
                 'name'      => $m->name,
-                'challenge' => $m->cr,
+                'data'      => $data,
                 'link'      => (new apiHelper())->createLink('monsters', $m->name)
             );
         }
