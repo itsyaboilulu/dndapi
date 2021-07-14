@@ -115,6 +115,7 @@ class monsterController extends controller
 
     public function single($response, $name)
     {
+        $name = str_replace('_', ' ', $name);
         $m = monsters::fromName($name);
         if ($m) {
             return $response->withJSON([
