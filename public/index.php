@@ -3,25 +3,11 @@
 session_start();
 
 require __DIR__ . '/../vendor/autoload.php';
+require __DIR__ . '/../app/settings.php';
 
 $logDate = new DateTime();
 
-$app = new Slim\App([
-    'settings'  => [
-        'displayErrorDetails' => TRUE,
-        'db'    => [
-            'driver'    => 'mysql',
-            'host'      => '127.0.0.1',
-            'database'  => 'dnd',
-            'username'  => 'lulu',
-            'password'  => 1327,
-            'charset'   => 'utf8',
-            'collation' => 'utf8_unicode_ci',
-        ],
-    ],
-]);
-
-
+$app = new Slim\App(settings());
 
 require __DIR__ . '/../app/routes.php';
 
