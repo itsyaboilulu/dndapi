@@ -49,28 +49,27 @@ class monsterController extends controller
                 $search = $search->where('name', 'like', "%" . $request->getParam('name') . "%");
             }
             if ($request->getParam('challenge')) {
-                if (strpos($request->getParam('challenge'), '>') === 0) {
-                    $c = str_replace('>', '', $request->getParam('challenge'));
+                if (strpos($request->getParam('challenge'), 'gt') === 0) {
+                    $c = str_replace('gt', '', $request->getParam('challenge'));
                     $o = '>=';
-                } else if (strpos($request->getParam('challenge'), '<') === 0) {
-                    $c = str_replace('<', '', $request->getParam('challenge'));
+                } else if (strpos($request->getParam('challenge'), 'lt') === 0) {
+                    $c = str_replace('lt', '', $request->getParam('challenge'));
                     $o = '<=';
                 } else {
                     $c = $request->getParam('challenge');
                     $o = '=';
                 }
-
                 $search = $search->where('cr', $o, $c);
             }
             if ($request->getParam('size')) {
                 $search = $search->where('size', ucfirst($request->getParam('size')));
             }
             if ($request->getParam('ac')) {
-                if (strpos($request->getParam('ac'), '>') >= 0) {
-                    $c = str_replace('>', '', $request->getParam('ac'));
+                if (strpos($request->getParam('ac'), 'gt') >= 0) {
+                    $c = str_replace('gt', '', $request->getParam('ac'));
                     $o = '>=';
-                } else if (strpos($request->getParam('ac'), '<') >= 0) {
-                    $c = str_replace('<', '', $request->getParam('ac'));
+                } else if (strpos($request->getParam('ac'), 'lt') >= 0) {
+                    $c = str_replace('lt', '', $request->getParam('ac'));
                     $o = '<=';
                 } else {
                     $c = $request->getParam('ac');
@@ -79,11 +78,11 @@ class monsterController extends controller
                 $search = $search->where('ac', $o, $c);
             }
             if ($request->getParam('hp')) {
-                if (strpos($request->getParam('hp'), '>') >= 0) {
-                    $c = str_replace('>', '', $request->getParam('ac'));
+                if (strpos($request->getParam('hp'), 'gt') >= 0) {
+                    $c = str_replace('gt', '', $request->getParam('ac'));
                     $o = '>=';
-                } else if (strpos($request->getParam('hp'), '<') >= 0) {
-                    $c = str_replace('<', '', $request->getParam('hp'));
+                } else if (strpos($request->getParam('hp'), 'lt') >= 0) {
+                    $c = str_replace('lt', '', $request->getParam('hp'));
                     $o = '<=';
                 } else {
                     $c = $request->getParam('hp');
@@ -100,6 +99,7 @@ class monsterController extends controller
             if ($request->getParam('align')) {
                 $search = $search->where('align', $request->getParam('align'));
             }
+            //return $search->toSql();
             foreach ($search->get() as $m) {
                 $data = array();
                 foreach (array('cr', 'size', 'type', 'hp', 'wildshape', 'ac', 'align') as $foo) {
