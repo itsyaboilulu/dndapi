@@ -61,6 +61,9 @@ class monsterController extends controller
                 }
                 $search = $search->where('cr', $o, $c);
             }
+            if ($request->getParam('ignorecrzero') === 1) {
+                $search = $search->where('cr', '!=', 0);
+            }
             if ($request->getParam('size')) {
                 $search = $search->where('size', ucfirst($request->getParam('size')));
             }
