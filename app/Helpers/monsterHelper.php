@@ -21,6 +21,7 @@ class monsterHelper
             case $request->getParam('hp'):
             case $request->getParam('align'):
             case $request->getParam('wildshape'):
+            case $request->getParam('challenge'):
                 return 1;
             default:
                 return 0;

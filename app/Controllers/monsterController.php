@@ -49,16 +49,17 @@ class monsterController extends controller
                 $search = $search->where('name', 'like', "%" . $request->getParam('name') . "%");
             }
             if ($request->getParam('challenge')) {
-                if (strpos($request->getParam('challenge'), '>') !== NULL) {
+                if (strpos($request->getParam('challenge'), '>') === 0) {
                     $c = str_replace('>', '', $request->getParam('challenge'));
                     $o = '>=';
-                } else if (strpos($request->getParam('challenge'), '<') !== NULL) {
+                } else if (strpos($request->getParam('challenge'), '<') === 0) {
                     $c = str_replace('<', '', $request->getParam('challenge'));
                     $o = '<=';
                 } else {
                     $c = $request->getParam('challenge');
                     $o = '=';
                 }
+
                 $search = $search->where('cr', $o, $c);
             }
             if ($request->getParam('size')) {
